@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct MC1LunarQuestApp: App {
+    
+    @StateObject var userData = UserModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(userData)
         }
     }
 }
