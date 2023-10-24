@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomePageView: View {
+    
     @EnvironmentObject var userData : UserModel
     
     var body: some View {

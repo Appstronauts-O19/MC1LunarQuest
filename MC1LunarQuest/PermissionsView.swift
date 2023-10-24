@@ -93,7 +93,7 @@ struct PermissionsView: View {
                     
                     HStack {
 
-                        NavigationLink(destination: HomePageView()) {
+                        NavigationLink(destination: HomePageView().environmentObject(userData)) {
                             Label("Explore the Universe  ", systemImage: "arrowshape.forward.circle")
                                 .background(RoundedRectangle(cornerRadius: 10)
                                     .foregroundColor(Color.gray.opacity(0.6)))
