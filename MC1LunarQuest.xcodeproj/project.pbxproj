@@ -13,6 +13,7 @@
 		1C9EB55A2AE800CD000BF55C /* UserSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9EB5542AE80049000BF55C /* UserSetupView.swift */; };
 		1C9EB55B2AE800D4000BF55C /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9EB5562AE80062000BF55C /* extensions.swift */; };
 		1C9EB55C2AE800D6000BF55C /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9EB5582AE80077000BF55C /* PermissionsView.swift */; };
+		6D3A83642AE808C700524475 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3A83632AE808C700524475 /* Settings.swift */; };
 		C84E93BA2AE6C83F00951A39 /* MC1LunarQuestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84E93B92AE6C83F00951A39 /* MC1LunarQuestApp.swift */; };
 		C84E93BC2AE6C83F00951A39 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84E93BB2AE6C83F00951A39 /* ContentView.swift */; };
 		C84E93BE2AE6C83F00951A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C84E93BD2AE6C83F00951A39 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 		1C9EB5542AE80049000BF55C /* UserSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSetupView.swift; sourceTree = "<group>"; };
 		1C9EB5562AE80062000BF55C /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		1C9EB5582AE80077000BF55C /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
+		6D3A83632AE808C700524475 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C84E93B62AE6C83F00951A39 /* MC1LunarQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MC1LunarQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84E93B92AE6C83F00951A39 /* MC1LunarQuestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC1LunarQuestApp.swift; sourceTree = "<group>"; };
 		C84E93BB2AE6C83F00951A39 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			children = (
 				C84E93B92AE6C83F00951A39 /* MC1LunarQuestApp.swift */,
 				1C9EB54E2AE7FF9A000BF55C /* HomePageView.swift */,
+				6D3A83632AE808C700524475 /* Settings.swift */,
 				C84E93BB2AE6C83F00951A39 /* ContentView.swift */,
 				1C9EB5502AE7FFBC000BF55C /* UserModel.swift */,
 				1C9EB5522AE80033000BF55C /* RoleSetupView.swift */,
@@ -281,6 +284,7 @@
 				1C9EB55B2AE800D4000BF55C /* extensions.swift in Sources */,
 				1C9EB5512AE7FFBC000BF55C /* UserModel.swift in Sources */,
 				C84E93BA2AE6C83F00951A39 /* MC1LunarQuestApp.swift in Sources */,
+				6D3A83642AE808C700524475 /* Settings.swift in Sources */,
 				1C9EB55A2AE800CD000BF55C /* UserSetupView.swift in Sources */,
 				1C9EB55C2AE800D6000BF55C /* PermissionsView.swift in Sources */,
 			);

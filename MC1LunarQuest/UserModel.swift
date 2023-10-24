@@ -12,6 +12,15 @@ import SwiftUI
 enum Role{
     case scientist
     case explorer
+    
+    var stringValue: String{
+        switch self{
+        case .explorer: 
+            return "Explorer"
+        case .scientist:
+            return "Scientist"
+        }
+    }
 }
 
 class UserModel: ObservableObject{

@@ -32,11 +32,11 @@ struct RoleSetupView: View {
         NavigationView{
             ZStack {
                 if userData.role == .explorer {
-                    Image(.explorer1) // Use the image for Role 1
+                    Image(.explorer) // Use the image for Role 1
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                 } else {
-                    Image(.scientist1) // Use the image for Role 2
+                    Image(.scientist) // Use the image for Role 2
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                 }

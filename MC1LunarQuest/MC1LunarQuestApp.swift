@@ -15,6 +15,7 @@ struct MC1LunarQuestApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView().environmentObject(userData)
+                .preferredColorScheme(.dark)
         }
     }
 }
