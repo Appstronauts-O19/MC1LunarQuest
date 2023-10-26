@@ -10,12 +10,28 @@ import SwiftUI
 @main
 struct MC1LunarQuestApp: App {
     
-    @StateObject var userData = UserModel()
+    @StateObject var userData = UserData()
     
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(userData)
-                .preferredColorScheme(.dark)
+            ContentView(user: $userData.user){
+                Task {
+                    do {
+                        try await userData.save(user: userData.user)
+                    } catch {
+                        fatalError(error.localizedDescription)
+                    }
+                }
+            }
+    
+            .task {
+                do {
+                    try await userData.load()
+                } catch {
+                    fatalError(error.localizedDescription)
+                }
+            }
+            .preferredColorScheme(.dark)
         }
     }
 }

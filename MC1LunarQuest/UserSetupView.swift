@@ -10,7 +10,7 @@ import Foundation
 
 
 struct UserSetupView: View {
-    @EnvironmentObject var userData : UserModel
+    @Binding var user : UserModel
     
     var body: some View {
         
@@ -40,7 +40,7 @@ struct UserSetupView: View {
                             .padding(.leading)
                         
                         
-                        Text("\(userData.username)")
+                        Text("\(user.username)")
                             .foregroundColor(.white)
                             .padding()
                     }
@@ -64,7 +64,7 @@ struct UserSetupView: View {
                                 .font(.system(size: 24))
                                 .foregroundColor(.white)
                             
-                            TextField("Your name", text: $userData.username)
+                            TextField("Your name", text: $user.username)
                             //doesn't work!!!!!!!!!!!!!!
                                 .foregroundColor(.white)
                                 .disableAutocorrection(true)
@@ -75,7 +75,7 @@ struct UserSetupView: View {
                     
                     
                     HStack{
-                        NavigationLink(destination: RoleSetupView()){
+                        NavigationLink(destination: RoleSetupView(user: $user)){
                             //Image(systemName: "arrowshape.forward.circle")
                             Label("Pick Your Role  ", systemImage: "arrowshape.forward.circle")
                                 .background(RoundedRectangle(cornerRadius: 10)
@@ -95,5 +95,6 @@ struct UserSetupView: View {
 }
 
 #Preview {
-    UserSetupView().environmentObject(UserModel())
+    
+    UserSetupView(user: .constant(UserData().user))
 }

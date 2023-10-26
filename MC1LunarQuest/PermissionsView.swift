@@ -9,27 +9,25 @@ import SwiftUI
 import AVFoundation
 
 
-func checkCameraAuthorization() async -> Bool {
-    let status = AVCaptureDevice.authorizationStatus(for: .video)
+
+class CameraPermissionViewModel: ObservableObject {
+    @Published var isCameraAuthorized = AVCaptureDevice.authorizationStatus(for: .video) == .authorized
     
-    // Determine if the user previously authorized camera access.
-    var isAuthorized = status == .authorized
-    
-    // If the system hasn't determined the user's authorization status,
-    // explicitly prompt them for approval.
-    if status == .notDetermined {
-        isAuthorized = await AVCaptureDevice.requestAccess(for: .video)
+    func requestCameraPermission() {
+        AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+            DispatchQueue.main.async {
+                self?.isCameraAuthorized = granted
+            }
+        }
     }
-    
-    return isAuthorized
 }
 
 
 struct PermissionsView: View {
     
-    @EnvironmentObject var userData : UserModel
+    @Binding var user : UserModel
     
-    @State private var cameraPermissionToggled = false
+    @ObservedObject var viewModel = CameraPermissionViewModel()
     @State private var isAlertPresented = false
     
     var body: some View {
@@ -70,36 +68,33 @@ struct PermissionsView: View {
                                     .padding()
                             }.padding()
                             
-                            Toggle("Allow Camera", isOn: $cameraPermissionToggled)
+                            Toggle("Allow Camera", isOn: $viewModel.isCameraAuthorized)
                                 .foregroundColor(.white)
                                 .font(.system(size: 18).weight(.semibold))
                                 .padding()
-                                .onChange(of: cameraPermissionToggled, { oldValue, newValue in
+                                .onChange(of: viewModel.isCameraAuthorized, { oldValue, newValue in
                                     if newValue {
                                         isAlertPresented = true
-                                        Task.init (operation: {
-                                            let isAuthorized = await checkCameraAuthorization()
-                                            if isAuthorized {
-                                                isAlertPresented = false
-                                            } else {
-                                                cameraPermissionToggled.toggle()
-                                            }
-                                        })
-                                    }
-                                })
+                                        viewModel.requestCameraPermission()
+                                        }
+                                    isAlertPresented = false
+                                    })
+                                
                         }
                                 
                     }.padding()
                     
-                    HStack {
+                    if viewModel.isCameraAuthorized{
+                        HStack {
 
-                        NavigationLink(destination: HomePageView().environmentObject(userData)) {
-                            Label("Explore the Universe  ", systemImage: "arrowshape.forward.circle")
-                                .background(RoundedRectangle(cornerRadius: 10)
-                                    .foregroundColor(Color.gray.opacity(0.6)))
-                                .foregroundColor(.white)
-                        }
-                    }.padding()
+                            NavigationLink(destination: HomePageView(user: $user)) {
+                                Label("Explore the Universe  ", systemImage: "arrowshape.forward.circle")
+                                    .background(RoundedRectangle(cornerRadius: 10)
+                                        .foregroundColor(Color.gray.opacity(0.6)))
+                                    .foregroundColor(.white)
+                            }
+                        }.padding()
+                    }
                     
                     Spacer()
                     
@@ -114,5 +109,6 @@ struct PermissionsView: View {
 }
 
 #Preview {
-    PermissionsView().environmentObject(UserModel())
+    
+    PermissionsView(user: .constant(UserData().user))
 }

@@ -9,15 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject var userData : UserModel
+    @Binding var user : UserModel
+    @Environment(\.scenePhase) private var scenePhase
+    let saveAction: ()->Void
     
     var body: some View {
         NavigationStack{
-            UserSetupView().environmentObject(userData)
+            UserSetupView(user: $user)
         }
+        .onChange(of: scenePhase, { oldValue, newValue in
+            if newValue == .inactive { saveAction() }
+        })
     }
 }
 
 #Preview {
-    ContentView().environmentObject(UserModel())
+    
+    ContentView(user: .constant(UserData().user), saveAction: {})
 }
+

@@ -8,30 +8,15 @@ import Foundation
 import SwiftUI
 
 
-struct PurpleButtonStyle: ButtonStyle {
-    
-    var toggled : Bool
-    
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding()
-            .background(toggled ? Color.RoleSetup_purple : Color.UserSetup_grey) // Change the background color to purple when pressed
-            .cornerRadius(40)
-    }
-}
-
-
-
-
 struct RoleSetupView: View {
     
-    @EnvironmentObject var userData : UserModel
+    @Binding var user : UserModel
         
     var body: some View {
         
         NavigationView{
             ZStack {
-                if userData.role == .explorer {
+                if user.role == .explorer {
                     Image(.explorer) // Use the image for Role 1
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -56,18 +41,18 @@ struct RoleSetupView: View {
                     
                     HStack {
                         Button("Explorer") {
-                            userData.role  = .explorer
+                            user.role  = .explorer
                         }
-                        .buttonStyle(PurpleButtonStyle(toggled: userData.role == .explorer))
+                        .buttonStyle(PurpleButtonStyle(toggled: user.role == .explorer))
                         
                         Button("Scientist") {
-                            userData.role  = .scientist
+                            user.role  = .scientist
                         }
-                        .buttonStyle(PurpleButtonStyle(toggled : userData.role == .scientist))
+                        .buttonStyle(PurpleButtonStyle(toggled : user.role == .scientist))
                     }.padding()
                     
                     HStack{
-                        NavigationLink(destination: PermissionsView().environmentObject(userData)){
+                        NavigationLink(destination: PermissionsView(user: $user)){
                             Label("Allow Permissions  ", systemImage: "arrowshape.forward.circle")
                                 .background(RoundedRectangle(cornerRadius: 10)
                                     .foregroundColor(.UserSetup_grey.opacity(0.6)))
@@ -86,6 +71,7 @@ struct RoleSetupView: View {
 }
 
 #Preview {
-    RoleSetupView().environmentObject(UserModel())
+    
+    RoleSetupView(user: .constant(UserData().user))
 }
 

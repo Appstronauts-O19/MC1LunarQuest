@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct HomePageView: View {
-    @EnvironmentObject var userData : UserModel
-    
+    @Binding var user : UserModel
     
     var body: some View {
         
@@ -39,7 +38,7 @@ struct HomePageView: View {
                             
                           
                             
-                            Image(userData.role.stringValue)
+                            Image(user.role.stringValue)
                                 .resizable()
                                 .frame(width: 157, height: 300)
                                 .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
@@ -47,7 +46,7 @@ struct HomePageView: View {
                                 
                             
                             
-                            Text("\(userData.username)")
+                            Text("\(user.username)")
                                 .font(
                                     Font.custom("SF Pro", size: 30)
                                         .weight(.bold)
@@ -56,7 +55,7 @@ struct HomePageView: View {
                                 .foregroundColor(.white)
                                 .frame(width: 233, alignment: .center)
                             
-                            Text("\(userData.role.stringValue)")
+                            Text("\(user.role.stringValue)")
                                 .font(
                                     Font.custom("SF Pro", size: 18)
                                         .weight(.medium)
@@ -104,7 +103,7 @@ struct HomePageView: View {
                     Button(action: {
                         
                     }) {
-                        NavigationLink(destination: Settings().environmentObject(userData)) {
+                        NavigationLink(destination: Settings(user: $user)) {
                             Label("Settings", systemImage: "gearshape.fill")
                                 .font(Font.custom("SF Pro", size: 17))
                                 .foregroundColor(.white)
@@ -151,5 +150,6 @@ struct HomePageView: View {
 }
 
 #Preview {
-    HomePageView().environmentObject(UserModel())
+    
+    HomePageView(user: .constant(UserData().user))
 }

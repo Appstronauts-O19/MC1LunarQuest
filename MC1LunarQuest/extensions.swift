@@ -14,3 +14,16 @@ extension Color {
 
 }
 
+struct PurpleButtonStyle: ButtonStyle {
+    
+    var toggled : Bool
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(toggled ? Color.RoleSetup_purple : Color.UserSetup_grey) // Change the background color to purple when pressed
+            .cornerRadius(40)
+    }
+}
+
+
